@@ -1,4 +1,4 @@
-<html ng-app="myapp" >
+<html ng-app="myapp">
 <head>
     <title>Notes application</title>
     <script src="angular.js"></script>
@@ -8,10 +8,14 @@
 
 </head>
 <body ng-controller="NotesCtrl">
-<div ng-repeat="note in notes" class="note">
-    <p>
-        {{note.text}}
-    </p>
+Add note:<br>
+<textarea rows="10" cols="50" ng-model="text" ng-keydown="$event.which === 13 && add()"> </textarea>
+<br>
+<button ng-click="add()">Add note</button>
+<br><br>
+<div ng-repeat="note in notes">
+    {{note.text}}
+<button ng-click="delete(note.id)">Remove note</button>
 </div>
 </body>
 </html>
