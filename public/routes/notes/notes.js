@@ -1,15 +1,8 @@
-// var module = angular.module("myapp", []);
+module.controller("NotesCtrl", function ($scope, $http, $routeParams, $location) {
 
-module.controller("NotesCtrl", function ($scope, $http) {
     $scope.notes = [];
     $scope.sections = [];
 
-    var get = function () {
-        $http.get("/notes")
-            .success(function (notes) {
-                $scope.notes = notes;
-            });
-    }
 
     var update = function () {
         var params = {params: {section: $scope.sections.activeSection}};
@@ -24,26 +17,32 @@ module.controller("NotesCtrl", function ($scope, $http) {
         $http.get("/sections")
             .success(function (sections) {
                 if (sections.length > 0) {
-                    $scope.activeSection = sections[0].title;
+                    $scope.activeSection = $routeParams.section;
+
                 }
                 $scope.sections = sections;
+
                 update();
             })
     }
-
-    $scope.notes = get();
     readSections();
+    //
+    // $scope.notes = function () {
+    //     $http.get("/notes")
+    //         .success(function (notes) {
+    //             $scope.notes = notes;
+    //         });
+    // };
 
     $scope.add = function () {
         var note = {
             text: $scope.text,
-            date: new Date(),
-            order: ""
+            date: new Date()
         };
-        note.section = $scope.activeSection;
-        if (!$scope.text || $scope.text.length==0) return;
         $http.post("/notes", note)
             .success(function () {
+                    note.section = $scope.activeSection;
+                    if (!$scope.text || $scope.text.length == 0) return;
                     $scope.text = "";
                     update();
                 }
@@ -59,27 +58,19 @@ module.controller("NotesCtrl", function ($scope, $http) {
             });
     };
 
-
-    //
-    // $scope.orderNote = function () {
-    //     $http.post("/order", {})
-    //         .success(function () {
-    //             update();
-    //         });
-    // }
-
     $scope.showSection = function (section) {
         $scope.activeSection = section.title;
         update();
+        $location.path(section.title);
     }
 
     $scope.addSection = function () {
-        if ($scope.newSection.length==0) {
+        if ($scope.newSection.length == 0) {
             return;
         }
         // check for duplicates
-        for (var i=0;i<$scope.sections.length;i++) {
-            if ($scope.sections[i].title==$scope.newSection) {
+        for (var i = 0; i < $scope.sections.length; i++) {
+            if ($scope.sections[i].title == $scope.newSection) {
                 return;
             }
         }
@@ -87,13 +78,16 @@ module.controller("NotesCtrl", function ($scope, $http) {
         $scope.sections.unshift(section);
         $scope.activeSection = $scope.newSection;
         $scope.newSection = "";
+        console.log($scope.sections);
         $scope.writeSections();
         update();
 
     }
 
     $scope.writeSections = function () {
-        if ($scope.sections && $scope.sections > 0) {
+        console.log($scope.sections);
+        if ($scope.sections && $scope.sections.length > 0) {
+            console.log("write section in db " + $scope.sections.title)
             $http.post("/sections/replace", $scope.sections);
         }
     }

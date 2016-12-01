@@ -3,14 +3,13 @@
         <textarea style="min-width:100%;min-height:200px" class="form-control" ng-model="text"></textarea>
     </div>
     <button ng-click="add()" class="btn btn-primary">Post note</button>
-</div>
-
-<div class="panel-heading" >
-    <h3 class="panel-title">
-        Add your note to
-        <a ng-href="#/section/{{activeSection}}">
-            {{activeSection}}</a>
-    </h3>
+    <div class="panel-heading inline-block">
+        <h3 class="panel-title">
+            Add your note to
+            <a ng-href="#/section/{{activeSection}}">
+                {{activeSection}}</a>
+        </h3>
+    </div>
 </div>
 
 <!--Add section-->
@@ -21,16 +20,14 @@
     </span>
 </div>
 <!--Sections-->
-<div class="col-md-4">
+<div>
     <ul class="list-group">
-        <li class="list-group-item" href="#" ng-repeat="section in sections" ng-click="showSection(section)"
+        <li class="list-group-item" ng-repeat="section in sections" ng-click="showSection(section)"
             ng-class="{active: section.title == activeSection}">
             {{section.title}}
         </li>
-
     </ul>
 </div>
-
 <div class="panel panel-default">
     <div class="panel-heading">Notes</div>
     <ul ng-repeat="note in notes">
@@ -43,4 +40,5 @@
         </li>
     </ul>
 </div>
+
 

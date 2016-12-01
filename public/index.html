@@ -1,4 +1,4 @@
-<html ng-app="notes">
+<html ng-app="myapp">
 <head>
     <title>Notes application</title>
     <link rel="stylesheet" href="styles.css">
@@ -9,15 +9,15 @@
     <script src="routes/routes.js"></script>
     <script src="routes/notes/notes.js"></script>
     <script src="routes/viewSection/viewSections.js"></script>
+    <script src="routes/userForm/userForm.js"></script>
 </head>
 
 <body ng-controller="NotesCtrl" class="body">
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <div class="navbar-brand">
-
-            <a ng-href="/">Notes tutorial app</a>
+            <div class="navbar-brand title">
+            <a ng-href="#/">Notes tutorial app</a>
             </div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -29,10 +29,24 @@
                     <input type="password" placeholder="Password" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-success">Sign in</button>
+                <a class="btn btn-primary" ng-href="#/register">Sign up</a>
             </form>
         </div><!--/.navbar-collapse -->
     </div>
 </nav>
+
+
+<div class="jumbotron">
+    <div class="container">
+        <h2>
+            <span class="glyphicon glyphicon-edit"></span>
+            Keep your notes in order
+        </h2>
+        <p>
+            A simple application to keep your own notes in order.
+        </p>
+    </div>
+</div>
 
 <div class="container" ng-view>
 </div>

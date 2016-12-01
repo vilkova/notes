@@ -1,0 +1,30 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">User registration form</div>
+    <div class="panel-body">
+        <form class="css-form" name="userForm" ng-submit="submitForm()">
+            <div class="form-group">
+
+                <label for="userName">User name</label>
+                <span ng-show="userForm.userName.$dirty && userForm.userName.$error.unique">User name is not unique</span>
+                <input type="text" class="form-control" id="userName" name="userName" placeholder="Type your name here" ng-model="user.name" required unique-user>
+                <!--<span ng-show="userForm.userName.$error">User name is mandatory</span>-->
+
+                <label for="password">Password</label>
+                <input type="password" ng-model="user.password" required class="form-control" id="password" name="password" placeholder="Create password" >
+
+                <label for="password2">Repeat password</label>
+                <span ng-show="userForm.password2.$touched && userForm.password2.$error.matchTo">Passwords should match</span>
+                <input type="password" class="form-control" id="password2" name="password2" placeholder="Repeat password" match-to="user.password" ng-model="user.password2" required>
+
+                <label for="email" ng-show="user.subscribe">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Type your email here" ng-model="user.email" ng-show="user.subscribe">
+
+                <div class="checkbox">
+                    <label><input type="checkbox" ng-model="user.subscribe">Subscribe for newsletters</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
