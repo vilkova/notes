@@ -5,18 +5,14 @@
     <button ng-click="add()" class="btn btn-primary">Post note</button>
 </div>
 
-<div class="panel panel-default">
-    <div class="panel-heading">Notes</div>
-    <ul ng-repeat="note in notes">
-        <li class="list-group-item">
-            {{note.text}}
-            <br>
-            Added at: {{note.date | date: 'HH:mm dd.MM.yyyy'}}
-            <buton ng-click="remove(note._id)" class="btn btn-primary">Remove note</buton>
-            <!--<buton ng-click="orderNote(note._id)" class="btn btn-primary">Send to top</buton>-->
-        </li>
-    </ul>
+<div class="panel-heading" >
+    <h3 class="panel-title">
+        Add your note to
+        <a ng-href="#/section/{{activeSection}}">
+            {{activeSection}}</a>
+    </h3>
 </div>
+
 <!--Add section-->
 <div class="input-group" style="padding-bottom:20px">
     <input type="text" class="form-control" placeholder="New section name" ng-model="newSection">
@@ -34,3 +30,17 @@
 
     </ul>
 </div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Notes</div>
+    <ul ng-repeat="note in notes">
+        <li class="list-group-item">
+            {{note.text}}
+            <br>
+            Added at: {{note.date | date: 'HH:mm dd.MM.yyyy'}}
+            <buton ng-click="remove(note._id)" class="btn btn-primary">Remove note</buton>
+            <!--<buton ng-click="orderNote(note._id)" class="btn btn-primary">Send to top</buton>-->
+        </li>
+    </ul>
+</div>
+

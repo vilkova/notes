@@ -24,7 +24,6 @@ module.controller("NotesCtrl", function ($scope, $http) {
         $http.get("/sections")
             .success(function (sections) {
                 if (sections.length > 0) {
-                    console.log(sections[0].title);
                     $scope.activeSection = sections[0].title;
                 }
                 $scope.sections = sections;

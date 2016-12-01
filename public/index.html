@@ -1,4 +1,4 @@
-<html ng-app="myapp">
+<html ng-app="notes">
 <head>
     <title>Notes application</title>
     <link rel="stylesheet" href="styles.css">
@@ -8,13 +8,17 @@
     <script src="js/angular-route.js"></script>
     <script src="routes/routes.js"></script>
     <script src="routes/notes/notes.js"></script>
+    <script src="routes/viewSection/viewSections.js"></script>
 </head>
 
 <body ng-controller="NotesCtrl" class="body">
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <div class="navbar-brand">Notes tutorial app</div>
+            <div class="navbar-brand">
+
+            <a ng-href="/">Notes tutorial app</a>
+            </div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <form class="navbar-form navbar-right">

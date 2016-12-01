@@ -38,3 +38,11 @@
     content: "|";
     padding-right: 0.3em;
 }
+
+.panel {
+    margin-top: 55px;
+}
+
+.panel-body {
+    margin-top: 70px;
+}
