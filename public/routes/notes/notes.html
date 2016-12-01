@@ -1,0 +1,36 @@
+<div class="panel-body">
+    <div class="form-group">
+        <textarea style="min-width:100%;min-height:200px" class="form-control" ng-model="text"></textarea>
+    </div>
+    <button ng-click="add()" class="btn btn-primary">Post note</button>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Notes</div>
+    <ul ng-repeat="note in notes">
+        <li class="list-group-item">
+            {{note.text}}
+            <br>
+            Added at: {{note.date | date: 'HH:mm dd.MM.yyyy'}}
+            <buton ng-click="remove(note._id)" class="btn btn-primary">Remove note</buton>
+            <!--<buton ng-click="orderNote(note._id)" class="btn btn-primary">Send to top</buton>-->
+        </li>
+    </ul>
+</div>
+<!--Add section-->
+<div class="input-group" style="padding-bottom:20px">
+    <input type="text" class="form-control" placeholder="New section name" ng-model="newSection">
+    <span class="input-group-btn">
+        <button class="btn btn-default" ng-click="addSection()">Add</button>
+    </span>
+</div>
+<!--Sections-->
+<div class="col-md-4">
+    <ul class="list-group">
+        <li class="list-group-item" href="#" ng-repeat="section in sections" ng-click="showSection(section)"
+            ng-class="{active: section.title == activeSection}">
+            {{section.title}}
+        </li>
+
+    </ul>
+</div>
