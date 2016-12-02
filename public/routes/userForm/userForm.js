@@ -3,9 +3,10 @@ module.controller('UserFormCtrl', function ($scope, $http, $location) {
     $scope.user = {};
 
     $scope.submitForm = function () {
+
         $http.post("/users", $scope.user)
             .success(function (data) {
-                // console.log("User" + $scope.user + "saved!");
+                console.log("User " + data);
                 $location.path("/");
             });
     }

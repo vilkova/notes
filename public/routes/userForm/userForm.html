@@ -1,7 +1,7 @@
 <div class="panel panel-primary">
     <div class="panel-heading">User registration form</div>
     <div class="panel-body">
-        <form class="css-form" name="userForm" ng-submit="submitForm()">
+        <form class="css-form" name="userForm" ng-submit="submitForm()" >
             <div class="form-group">
 
                 <label for="userName">User name</label>
@@ -10,7 +10,7 @@
                 <!--<span ng-show="userForm.userName.$error">User name is mandatory</span>-->
 
                 <label for="password">Password</label>
-                <input type="password" ng-model="user.password" required class="form-control" id="password" name="password" placeholder="Create password" >
+                <input type="password"  class="form-control" id="password" name="password" placeholder="Create password" ng-model="user.password"  required>
 
                 <label for="password2">Repeat password</label>
                 <span ng-show="userForm.password2.$touched && userForm.password2.$error.matchTo">Passwords should match</span>
@@ -25,6 +25,7 @@
 
                 <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit</button>
             </div>
+
         </form>
     </div>
 </div>

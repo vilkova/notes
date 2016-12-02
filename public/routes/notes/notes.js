@@ -75,7 +75,8 @@ module.controller("NotesCtrl", function ($scope, $http, $routeParams, $location)
             }
         }
         var section = {title: $scope.newSection};
-        $scope.sections.unshift(section);
+        var sections = Array.prototype.slice.call( $scope.sections);
+        sections.unshift(section);
         $scope.activeSection = $scope.newSection;
         $scope.newSection = "";
         console.log($scope.sections);

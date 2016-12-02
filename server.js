@@ -78,27 +78,22 @@ app.delete("/notes", function (req, res) {
 // });
 
 app.get("/sections", function (req, res) {
-        db.sections.find(req.query).toArray(function (err, items) {
-            res.send(items);
+    var userName = req.session.userName || "demo";
+    console.log(userName)
+    db.users.find({name: userName})
+        .toArray(function (err, items) {
+            var user = items[0];
+            res.send(user.sections);
         });
-    }
-);
+});
 
 app.post("/sections/replace", function (req, res) {
-    if (req.body.length == 0) {
-        res.end();
-    }
-    db.sections.remove({}, function (err) {
-        if (err) {
-            console.log(err);
-        }
-        db.sections.insert(req.body, function (err) {
-            if (err) {
-                console.log("insert error" + err);
-            }
+    var userName = req.session.userName || "demo";
+    db.users.update({name: userName},
+        {$set: {sections: req.body}},
+        function () {
             res.end();
         });
-    })
 });
 
 app.get("/checkUser", function (req, res) {
@@ -108,11 +103,43 @@ app.get("/checkUser", function (req, res) {
 });
 
 app.post("/users", function (req, res) {
+    console.log(req.body);
     db.users.insert(req.body, function (resp) {
         req.session.userName = req.body.userName;
         res.end();
     });
 });
+
+app.get("/notes", function (req, res) {
+    setUserQuery(req);
+    db.notes.find(req.query).toArray(function (err, items) {
+        res.send(items);
+    });
+});
+
+app.post("/login", function (req, res) {
+    db.users.find(
+        {
+            name: req.body.login,
+            password: req.body.password
+        })
+        .toArray(function (err, items) {
+            console.log(items)
+            if (items.length > 0) {
+                req.session.userName = req.body.login;
+            }
+            res.send(items.length > 0);
+        });
+});
+
+app.get("/logout", function (req, res) {
+    req.session.userName = null;
+    res.end();
+});
+
+function setUserQuery(req) {
+    req.query.userName = req.session.userName || "demo";
+};
 
 
 /*
